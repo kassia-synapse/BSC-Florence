@@ -1,0 +1,1648 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BSC Estratégico Clínica Florence 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+ /* Base */
+ --ink: #1B1530;
+ --ink-mid: #241B42;
+ --teal: #6A2EF5;
+ --teal-mid: #7C4DFF;
+ --teal-lt: #A78BFA;
+ --teal-faint: #F3EEFF;
+ --cream: #F7F4FC;
+ --cream-dk: #EEE8F8;
+ --white: #FFFFFF;
+ --gold: #7C4DFF;
+ --gold-lt: #B7A3FF;
+ --gold-faint: #F4EFFF;
+ --border: #DDD5F3;
+ --muted: #6C6490;
+
+ /* BSC Perspectives */
+ --fin: #4C1D95;
+ --fin-lt: #EEE7FF;
+ --fin-bd: #8B5CF6;
+ --cli: #6A2EF5;
+ --cli-lt: #F2EDFF;
+ --cli-bd: #A78BFA;
+ --proc: #7C3AED;
+ --proc-lt: #F5F0FF;
+ --proc-bd: #C4B5FD;
+ --apr: #5B21B6;
+ --apr-lt: #EFE7FF;
+ --apr-bd: #A78BFA;
+
+ /* Maturity */
+ --mat-cons-bg: #E8F5E9; --mat-cons-fg: #1B5E20; --mat-cons-bd: #81C784;
+ --mat-val-bg: #FFF8E1; --mat-val-fg: #7B5800; --mat-val-bd: #FFD54F;
+ --mat-pend-bg: #FFF3E0; --mat-pend-fg: #8D3900; --mat-pend-bd: #FFCC80;
+ --mat-base-bg: #F3F3F3; --mat-base-fg: #555; --mat-base-bd: #BDBDBD;
+
+ /* Status */
+ --s-ok: #1A7A4A;
+ --s-warn: #C97E10;
+ --s-crit: #B84040;
+ --s-none: #888;
+}
+
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+ font-family: 'Inter', sans-serif;
+ background: var(--cream);
+ color: var(--ink);
+ font-size: 13.5px;
+ line-height: 1.5;
+}
+
+/* TOP BAR */
+.topbar {
+ background: var(--ink-mid);
+ padding: 0 2.5rem;
+ height: 54px;
+ display: flex;
+ align-items: center;
+ gap: 0;
+ position: sticky;
+ top: 0;
+ z-index: 200;
+ box-shadow: 0 2px 14px rgba(0,0,0,.35);
+ border-bottom: 2px solid var(--gold);
+}
+.brand {
+ font-size: 13px;
+ font-weight: 600;
+ color: var(--teal-lt);
+ letter-spacing: .03em;
+ margin-right: auto;
+ white-space: normal;
+}
+.brand small { font-weight: 300; color: rgba(255,255,255,.45); font-size: 11px; margin-left: .5rem; }
+.tab-btn {
+ background: none; border: none;
+ color: rgba(255,255,255,.45);
+ font-family: 'Inter', sans-serif;
+ font-size: 11px; font-weight: 500;
+ letter-spacing: .07em; text-transform: uppercase;
+ padding: 0 1rem; height: 54px;
+ cursor: pointer;
+ border-bottom: 2px solid transparent;
+ transition: .18s;
+}
+.tab-btn:hover { color: #fff; }
+.tab-btn.active { color: var(--teal-lt); border-color: var(--teal-lt); }
+.export-btn {
+ background: var(--teal-mid); color: #fff;
+ border: none; padding: .38rem 1rem;
+ border-radius: 4px; font-size: 11px;
+ font-weight: 600; letter-spacing: .05em;
+ cursor: pointer; text-transform: uppercase;
+ transition: background .18s; margin-left: .8rem;
+ white-space: nowrap;
+}
+.export-btn:hover { background: var(--teal); }
+
+/* VIEWS */
+.view { display: none; }
+.view.active { display: block; }
+
+/* 
+ HERO
+ */
+.hero {
+ background: var(--ink-mid);
+ padding: 3.5rem 3rem 3rem;
+ position: relative;
+ overflow: hidden;
+ border-bottom: 3px solid var(--gold);
+}
+.hero::before {
+ content: '';
+ position: absolute; right: -80px; top: -80px;
+ width: 420px; height: 420px; border-radius: 50%;
+ background: radial-gradient(circle, rgba(0,107,94,.28) 0%, transparent 68%);
+}
+.hero-inner { max-width: 1080px; margin: 0 auto; }
+.hero-eyebrow {
+ font-size: 10px; font-weight: 600; letter-spacing: .18em;
+ text-transform: uppercase; color: var(--gold-lt); margin-bottom: .8rem;
+}
+.hero-title {
+ font-size: clamp(1.7rem, 2.8vw, 2.5rem);
+ font-weight: 700; color: #fff;
+ line-height: 1.15; margin-bottom: .5rem;
+ letter-spacing: -.01em;
+}
+.hero-sub { color: rgba(255,255,255,.5); font-size: 12.5px; max-width: 520px; font-weight: 300; }
+
+/* Mission strip */
+.mission-strip {
+ background: rgba(0,107,94,.15);
+ border: 1px solid rgba(77,184,140,.2);
+ border-radius: 6px;
+ padding: .7rem 1.2rem;
+ margin-top: 1.2rem;
+ font-size: 12px;
+ color: rgba(255,255,255,.7);
+ font-style: italic;
+ max-width: 720px;
+}
+.mission-strip strong { color: var(--gold-lt); font-style: normal; font-size: 9px; letter-spacing: .1em; text-transform: uppercase; margin-right: .5rem; }
+
+/* North Star pills */
+.nsm-bar { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.8rem; align-items: flex-start; }
+.nsm-pill {
+ background: rgba(77,184,140,.1);
+ border: 1px solid rgba(77,184,140,.28);
+ border-radius: 6px;
+ padding: .6rem 1.1rem; color: #fff;
+}
+.nsm-pill strong {
+ font-family: 'Inter', monospace;
+ font-size: 1.25rem; font-weight: 700;
+ color: var(--teal-lt); display: block; letter-spacing: -.01em;
+}
+.nsm-pill small { font-size: 10px; letter-spacing: .05em; text-transform: uppercase; opacity: .6; }
+
+/* 
+ SECTIONS / SHARED
+ */
+.section { max-width: 1080px; margin: 0 auto; padding: 2.5rem 2rem; }
+.section-title {
+ font-size: 11px; font-weight: 700; letter-spacing: .12em;
+ text-transform: uppercase; color: var(--muted);
+ margin-bottom: 1.2rem;
+ padding-bottom: .5rem;
+ border-bottom: 1px solid var(--border);
+ display: flex; align-items: center; gap: .7rem;
+}
+.section-title .tag {
+ background: var(--teal); color: #fff;
+ font-size: 9px; padding: .15rem .5rem;
+ border-radius: 3px; letter-spacing: .06em;
+}
+
+/* Consultant callout */
+.callout {
+ background: var(--gold-faint);
+ border-left: 3px solid var(--gold);
+ border-radius: 5px;
+ padding: .9rem 1.1rem;
+ margin-bottom: 1.2rem;
+ font-size: 12px; line-height: 1.65; color: #3d2c00;
+}
+.callout strong { color: var(--gold); font-size: 10px; letter-spacing: .07em; text-transform: uppercase; }
+
+/* 
+ MATURITY TAGS
+ */
+.mat {
+ display: inline-flex; align-items: center; gap: 3px;
+ font-size: 8.5px; font-weight: 600; letter-spacing: .08em;
+ padding: 2px 6px; border-radius: 8px;
+ vertical-align: middle; white-space: nowrap; border: 1px solid;
+ text-transform: uppercase; margin-left: 5px;
+}
+.mat-cons { background: var(--mat-cons-bg); color: var(--mat-cons-fg); border-color: var(--mat-cons-bd); }
+.mat-val { background: var(--mat-val-bg); color: var(--mat-val-fg); border-color: var(--mat-val-bd); }
+.mat-pend { background: var(--mat-pend-bg); color: var(--mat-pend-fg); border-color: var(--mat-pend-bd); }
+.mat-base { background: var(--mat-base-bg); color: var(--mat-base-fg); border-color: var(--mat-base-bd); }
+
+/* 
+ BSC PERSPECTIVE BLOCKS
+ */
+.bsc-perspective {
+ border-radius: 8px; overflow: hidden;
+ margin-bottom: 1rem;
+ box-shadow: 0 1px 8px rgba(0,0,0,.07);
+ border: 1px solid var(--border);
+}
+.persp-header {
+ display: grid;
+ grid-template-columns: 230px 1fr;
+}
+.persp-label {
+ padding: .9rem 1.2rem;
+ display: flex; align-items: flex-start; gap: .6rem;
+ font-weight: 600; font-size: 13px;
+}
+.persp-label .pl-sub {
+ font-size: 9.5px; font-weight: 400; opacity: .72;
+ letter-spacing: .03em; margin-top: .15rem;
+ line-height: 1.4;
+}
+.persp-icon { font-size: 1.2rem; flex-shrink: 0; }
+.persp-objectives {
+ padding: .6rem .9rem;
+ display: flex; flex-wrap: wrap; gap: .45rem;
+ align-items: center;
+ background: rgba(255,255,255,.55);
+ border-left: 1px solid rgba(255,255,255,.2);
+}
+.obj-badge {
+ font-size: 11px; font-weight: 500;
+ padding: .3rem .7rem; border-radius: 5px;
+ border: 1px solid; cursor: pointer;
+ transition: .15s; white-space: normal; line-height: 1.35;
+ text-align: left;
+ max-width: 250px;
+ overflow-wrap: anywhere;
+}
+.obj-badge:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,.1); }
+.obj-badge small { display: block; font-size: 9.5px; opacity: .7; font-weight: 400; }
+
+/* Theme variants */
+.fin-theme .persp-label { background: var(--fin); color: #fff; }
+.fin-theme .obj-badge { background: var(--fin-lt); border-color: var(--fin-bd); color: var(--fin); }
+.cli-theme .persp-label { background: var(--cli); color: #fff; }
+.cli-theme .obj-badge { background: var(--cli-lt); border-color: var(--cli-bd); color: var(--cli); }
+.proc-theme .persp-label { background: var(--proc); color: #fff; }
+.proc-theme .obj-badge { background: var(--proc-lt); border-color: var(--proc-bd); color: var(--proc); }
+.apr-theme .persp-label { background: var(--apr); color: #fff; }
+.apr-theme .obj-badge { background: var(--apr-lt); border-color: var(--apr-bd); color: var(--apr); }
+
+/* 
+ KR CARDS
+ */
+.kr-grid {
+ display: grid;
+ grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+ gap: .9rem;
+ margin-top: .8rem;
+}
+.kr-card {
+ background: #fff; border-radius: 8px;
+ padding: 1.1rem; border: 1px solid var(--border);
+ transition: .18s; cursor: pointer; position: relative;
+}
+.kr-card:hover { box-shadow: 0 4px 18px rgba(0,107,94,.12); border-color: var(--teal-lt); }
+.kr-card-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: .55rem; }
+.kr-tag {
+ font-size: 9px; font-weight: 700; letter-spacing: .1em;
+ text-transform: uppercase;
+ background: var(--teal-faint); color: var(--teal);
+ padding: .15rem .5rem; border-radius: 3px;
+}
+.kr-area-badge {
+ font-size: 9px; font-weight: 600; letter-spacing: .07em;
+ color: var(--muted); text-transform: uppercase;
+}
+.kr-title { font-size: 12.5px; font-weight: 600; color: var(--ink); line-height: 1.4; margin-bottom: .5rem; }
+.kr-meta { display: flex; flex-wrap: wrap; gap: .35rem; margin-bottom: .7rem; }
+.meta-chip {
+ font-size: 10px; font-weight: 500;
+ background: var(--teal-faint); color: var(--teal);
+ padding: .12rem .5rem; border-radius: 3px;
+}
+
+.kr-title, .hero-sub, .mission-strip, .callout, .ct-text, .ind-name, .panel-section p, .casc-box .casc-meta, .section-title {
+ overflow-wrap: anywhere;
+}
+
+.persp-objectives {
+ align-items: stretch;
+}
+.kr-indicators { display: flex; flex-direction: column; gap: .3rem; }
+.ind-row {
+ display: flex; align-items: flex-start; gap: .45rem;
+ font-size: 11px; line-height: 1.35;
+ padding: .35rem .45rem; background: var(--cream);
+ border-radius: 4px;
+}
+.ind-dot {
+ width: 5px; height: 5px; border-radius: 50%;
+ background: var(--teal-mid); flex-shrink: 0; margin-top: .4rem;
+}
+.ind-name { flex: 1; color: var(--ink); }
+.ind-meta {
+ font-size: 10px; font-weight: 600;
+ color: var(--teal-mid); white-space: normal;
+ text-align: right;
+ max-width: 130px;
+ font-variant-numeric: tabular-nums;
+}
+
+/* Area chip with "in consolidation" style */
+.area-chip {
+ display: inline-flex; align-items: center; gap: .3rem;
+ font-size: 11px; font-weight: 500;
+ padding: .3rem .7rem; border-radius: 5px;
+ border: 1px dashed var(--border); color: var(--muted);
+}
+.kr-card.area-pending {
+ border-style: dashed;
+ opacity: .88;
+}
+.pending-banner {
+ background: var(--mat-pend-bg);
+ color: var(--mat-pend-fg);
+ font-size: 10px; font-weight: 600;
+ letter-spacing: .06em; text-transform: uppercase;
+ padding: .3rem .7rem;
+ border-radius: 4px;
+ margin-bottom: .6rem;
+ border: 1px solid var(--mat-pend-bd);
+}
+
+/* 
+ DETAIL PANEL
+ */
+#detail-panel {
+ display: none;
+ position: fixed; right: 0; top: 54px; bottom: 0;
+ width: 420px; background: #fff;
+ border-left: 2px solid var(--teal-mid);
+ z-index: 150;
+ overflow-y: auto;
+ box-shadow: -6px 0 28px rgba(0,0,0,.14);
+}
+#detail-panel.open { display: flex; flex-direction: column; }
+.panel-header {
+ background: var(--teal); color: #fff;
+ padding: 1.1rem 1.4rem;
+ display: flex; justify-content: space-between; align-items: flex-start;
+ flex-shrink: 0;
+}
+.panel-header h3 { font-size: .95rem; line-height: 1.35; font-weight: 600; }
+.panel-close {
+ background: none; border: none; color: #fff;
+ font-size: 1.2rem; cursor: pointer; opacity: .7;
+ flex-shrink: 0; margin-left: .5rem; padding: 0; line-height: 1;
+}
+.panel-body { padding: 1.1rem 1.4rem; flex: 1; overflow-y: auto; }
+.panel-section { margin-bottom: 1.1rem; }
+.panel-section h4 {
+ font-size: 9px; font-weight: 700; letter-spacing: .14em;
+ text-transform: uppercase; color: var(--muted); margin-bottom: .45rem;
+}
+.panel-section p { font-size: 12px; line-height: 1.6; color: var(--ink); }
+.ind-list { list-style: none; }
+.ind-list li {
+ border: 1px solid var(--border); border-radius: 5px;
+ padding: .55rem .75rem; margin-bottom: .35rem; font-size: 11px;
+}
+.ind-list .i-name { font-weight: 600; margin-bottom: .15rem; color: var(--ink); }
+.ind-list .i-meta { font-size: 10px; color: var(--teal-mid); font-weight: 500; }
+.ind-list .i-source { font-size: 10px; color: var(--muted); margin-top: .1rem; }
+.edit-field {
+ background: var(--cream); border: 1px solid var(--border);
+ border-radius: 5px; padding: .55rem .75rem;
+ font-family: 'Inter', sans-serif; font-size: 12px;
+ color: var(--ink); width: 100%; resize: vertical; margin-bottom: .4rem;
+ transition: border-color .18s;
+}
+.edit-field:focus { outline: none; border-color: var(--teal-mid); }
+.save-btn {
+ background: var(--teal-mid); color: #fff; border: none;
+ padding: .45rem 1.1rem; border-radius: 5px; font-weight: 600;
+ font-size: 11px; cursor: pointer; letter-spacing: .04em;
+ text-transform: uppercase; transition: background .18s;
+}
+.save-btn:hover { background: var(--teal); }
+
+/* Gov table in panel */
+.gov-table-mini { width: 100%; border-collapse: collapse; font-size: 11px; }
+.gov-table-mini td { padding: .4rem .5rem; vertical-align: top; line-height: 1.45; border-bottom: 1px solid var(--border); }
+.gov-table-mini td:first-child { font-weight: 600; color: var(--muted); width: 90px; font-size: 10px; text-transform: uppercase; letter-spacing: .04em; }
+.gov-table-mini tr:last-child td { border-bottom: none; }
+
+/* 
+ CASCADE VIEW
+ */
+.cascade-wrap { max-width: 1080px; margin: 0 auto; padding: 2.5rem 2rem; }
+.cascade-diagram {
+ background: #fff; border: 1px solid var(--border);
+ border-radius: 10px; padding: 2rem; overflow-x: auto;
+}
+.casc-main-title {
+ font-size: .95rem; font-weight: 700; color: var(--teal);
+ text-align: center; margin-bottom: 2rem; letter-spacing: .02em;
+}
+
+/* North Star */
+.ns-box {
+ background: var(--ink-mid); color: #fff;
+ border-radius: 8px; border: 2px solid var(--gold);
+ padding: 1rem 2rem; text-align: center;
+ max-width: 360px; margin: 0 auto 1.1rem;
+}
+.ns-box .star { font-size: 1.1rem; margin-bottom: .3rem; color: var(--gold-lt); }
+.ns-box strong { font-size: 1rem; font-weight: 700; display: block; color: var(--teal-lt); }
+.ns-box small { font-size: 10px; opacity: .55; letter-spacing: .04em; }
+
+/* BSC cascade rows */
+.casc-layer { margin-bottom: 1rem; }
+.casc-layer-label {
+ font-size: 9px; font-weight: 700; letter-spacing: .15em;
+ text-transform: uppercase; text-align: center;
+ margin-bottom: .6rem;
+}
+.casc-row { display: flex; justify-content: center; gap: .7rem; flex-wrap: wrap; }
+.casc-box {
+ border-radius: 7px; padding: .7rem .95rem;
+ min-width: 160px; max-width: 240px; text-align: center;
+ font-size: 11px; font-weight: 600;
+ border: 1px solid; line-height: 1.4;
+ overflow-wrap: anywhere;
+}
+.casc-box .casc-meta {
+ font-size: 9.5px; font-weight: 400;
+ display: block; margin-top: .15rem; opacity: .75;
+}
+.casc-arrow { display: flex; justify-content: center; color: var(--border); font-size: 1.4rem; margin-bottom: .6rem; }
+
+/* Funnel area flow revised for linear sequence */
+.funnel-area-section { margin-top: 2rem; }
+.funnel-area-title {
+ font-size: 9px; font-weight: 700; letter-spacing: .14em;
+ text-transform: uppercase; color: var(--muted);
+ text-align: center; margin-bottom: 1rem;
+}
+.funnel-main-flow {
+ display: flex; align-items: center; justify-content: center;
+ flex-wrap: wrap; gap: .4rem;
+ padding: 1rem;
+ background: var(--teal-faint);
+ border: 1px solid var(--cli-bd);
+ border-radius: 8px;
+ margin-bottom: .7rem;
+}
+.flow-step {
+ background: #fff; border: 1px solid var(--border);
+ border-radius: 5px; padding: .35rem .65rem;
+ font-size: 11px; font-weight: 500; color: var(--ink);
+ white-space: normal; text-align: center; line-height: 1.35;
+ min-width: 118px; max-width: 170px;
+ overflow-wrap: anywhere;
+}
+.flow-step small { display: block; font-size: 9.5px; color: var(--muted); font-weight: 400; }
+.flow-step.pending-step {
+ border-style: dashed; opacity: .75;
+ background: var(--mat-pend-bg); color: var(--mat-pend-fg); border-color: var(--mat-pend-bd);
+}
+.flow-arrow { color: var(--teal-lt); font-size: 1rem; font-weight: 700; }
+
+/* Comm transversal block */
+.comm-transversal {
+ background: var(--apr-lt);
+ border: 1px dashed var(--apr-bd);
+ border-radius: 8px; padding: .8rem 1.2rem;
+ margin-bottom: .7rem;
+ display: flex; align-items: center; gap: .8rem;
+}
+.comm-transversal .ct-label {
+ font-size: 9px; font-weight: 700; letter-spacing: .1em;
+ text-transform: uppercase; color: var(--apr); white-space: nowrap;
+}
+.comm-transversal .ct-text { font-size: 11.5px; color: var(--apr); line-height: 1.4; }
+
+/* 
+ GOVERNANCE SECTION (colapsável)
+ */
+.gov-block {
+ background: #fff; border: 1px solid var(--border);
+ border-radius: 8px; overflow: hidden;
+ margin-top: 1.5rem;
+}
+.gov-header {
+ background: var(--ink-mid); padding: .9rem 1.2rem;
+ display: flex; align-items: center; gap: .8rem;
+ cursor: pointer; user-select: none; transition: filter .18s;
+}
+.gov-header:hover { filter: brightness(1.1); }
+.gov-header .gh-icon { font-size: 1rem; }
+.gov-header .gh-title {
+ font-size: 12px; font-weight: 700; color: #fff;
+ letter-spacing: .04em; flex: 1;
+}
+.gov-header .gh-sub { font-size: 11px; color: rgba(255,255,255,.5); }
+.gov-header .gh-chev { color: rgba(255,255,255,.5); font-size: 12px; transition: transform .2s; }
+.gov-header .gh-chev.open { transform: rotate(180deg); }
+.gov-body { overflow: hidden; }
+table.gov-table { width: 100%; border-collapse: collapse; }
+table.gov-table thead tr { background: var(--cream-dk); }
+table.gov-table thead th {
+ padding: .6rem .9rem; font-size: 9.5px; font-weight: 700;
+ letter-spacing: .1em; text-transform: uppercase; color: var(--muted);
+ text-align: left; white-space: nowrap;
+}
+table.gov-table tbody tr { border-bottom: 1px solid var(--cream-dk); }
+table.gov-table tbody tr:last-child { border-bottom: none; }
+table.gov-table tbody tr:hover { background: #fafaf6; }
+table.gov-table td { padding: .6rem .9rem; vertical-align: top; font-size: 11.5px; line-height: 1.5; color: var(--ink); }
+table.gov-table td.gt-ind { font-weight: 500; min-width: 200px; }
+table.gov-table td.gt-persp { font-size: 10px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; width: 90px; }
+table.gov-table td.gt-fonte { color: var(--muted); font-size: 11px; width: 160px; }
+table.gov-table td.gt-freq { color: var(--muted); font-size: 11px; width: 80px; }
+table.gov-table td.gt-obs { color: #6B4A00; font-size: 11px; }
+
+/* 
+ MATURITY LEGEND
+ */
+.mat-legend {
+ background: var(--cream-dk); border: 1px solid var(--border);
+ border-radius: 6px; padding: .8rem 1.1rem;
+ display: flex; flex-wrap: wrap; gap: 1rem;
+ align-items: center; margin-bottom: 1.2rem;
+}
+.mat-legend-title {
+ font-size: 9px; font-weight: 700; letter-spacing: .12em;
+ text-transform: uppercase; color: var(--muted); width: 100%;
+}
+.mat-legend-items { display: flex; flex-wrap: wrap; gap: .5rem; }
+
+/* 
+ TOAST
+ */
+.toast {
+ position: fixed; bottom: 2rem; left: 50%;
+ transform: translateX(-50%);
+ background: var(--teal); color: #fff;
+ padding: .55rem 1.4rem; border-radius: 20px;
+ font-size: 12px; font-weight: 600; z-index: 999;
+ box-shadow: 0 4px 18px rgba(0,0,0,.22);
+ animation: fadeInUp .25s ease;
+}
+@keyframes fadeInUp { from { opacity:0; transform:translateX(-50%) translateY(8px); } to { opacity:1; transform:translateX(-50%) translateY(0); } }
+
+/* 
+ RESPONSIVE
+ */
+@media(max-width:768px) {
+ #detail-panel { width: 100%; top: auto; bottom: 0; height: 62vh; border: none; border-top: 2px solid var(--teal-mid); }
+ .persp-header { grid-template-columns: 1fr; }
+ .casc-row { flex-direction: column; align-items: center; }
+ .topbar { padding: .4rem 1rem; gap: .35rem; height: auto; min-height: 54px; flex-wrap: wrap; }
+ .tab-btn { padding: 0 .6rem; font-size: 10px; }
+ .brand { width: 100%; }
+ .obj-badge, .casc-box, .flow-step { max-width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<header class="topbar">
+ <div class="brand">Clínica Florence <small>BSC Estratégico 2026</small></div>
+ <button class="tab-btn active" id="tab-bsc" onclick="showView('bsc', this)">BSC</button>
+ <button class="tab-btn" id="tab-cascade" onclick="showView('cascade', this)">Cascata</button>
+ <button class="tab-btn" id="tab-okrs" onclick="showView('okrs', this)">OKRs por Área</button>
+ <button class="export-btn" onclick="exportCSV()">Exportar CSV</button>
+</header>
+
+<!-- DETAIL PANEL -->
+<div id="detail-panel">
+ <div class="panel-header">
+ <h3 id="panel-title">—</h3>
+ <button class="panel-close" onclick="closePanel()">&times;</button>
+ </div>
+ <div class="panel-body" id="panel-body"></div>
+</div>
+
+<!-- 
+ VIEW: BSC
+ -->
+<div class="view active" id="view-bsc">
+
+ <div class="hero">
+ <div class="hero-inner">
+ <div class="hero-eyebrow">Balanced Scorecard · Florence 2026</div>
+ <h1 class="hero-title">Mapa Estratégico<br>Clínica Florence</h1>
+ <p class="hero-sub">Clique em qualquer perspectiva ou objetivo para acessar os KRs vinculados e adicionar notas executivas.</p>
+ <div class="mission-strip">
+ <strong>Tema Estratégico</strong>
+ Construir uma engrenagem integrada de crescimento gerando demanda rastreável, funil de jornada eficiente, vínculo duradouro com pacientes e médicos, e retornos sustentáveis de ocupação e receita ambulatorial.
+ </div>
+ <div class="nsm-bar">
+ <div class="nsm-pill"><strong>&#8805; 90%</strong><small>Ocupação de Leitos</small></div>
+ <div class="nsm-pill"><strong>NPS &#8805; 85</strong><small>NPS Global Florence</small></div>
+ <div class="nsm-pill"><strong>SSA + REC</strong><small>Duas Unidades</small></div>
+ </div>
+ </div>
+ </div>
+
+ <div class="section">
+
+ <div class="callout">
+ <strong> Nota Metodológica</strong> O BSC organiza OKRs de 6 áreas (Growth, Pré-Qualificação, <strong>Avaliação</strong>, Pós-Alta, Relacionamento Médico e Comunicação Externa) nas 4 perspectivas clássicas. Tags de maturidade indicam nível de consolidação de cada KR. Clique em qualquer objetivo para ver indicadores, fontes e notas editáveis.
+ </div>
+
+ <!-- Maturity Legend -->
+ <div class="mat-legend">
+ <div class="mat-legend-title">Maturidade dos indicadores</div>
+ <div class="mat-legend-items">
+ <span class="mat mat-cons">Consolidado método e fonte definidos</span>
+ <span class="mat mat-val">Em validação baseline em apuração</span>
+ <span class="mat mat-pend">Pendente definição depende de protocolo ou OKR</span>
+ <span class="mat mat-base">Sem baseline medição não iniciada</span>
+ </div>
+ </div>
+
+ <!-- FINANCEIRA -->
+ <div class="bsc-perspective fin-theme">
+ <div class="persp-header">
+ <div class="persp-label">
+ <span class="persp-icon"></span>
+ <div>
+ <div>Financeira</div>
+ <div class="pl-sub">Receita · Margem · CAC / CPA · LTV · Ocupação</div>
+ </div>
+ </div>
+ <div class="persp-objectives">
+ <div class="obj-badge" onclick="openObjective('fin1')">
+ Aumentar Receita
+ <small>+15% vs 2025 · referência para calibração Q1</small>
+ </div>
+ <div class="obj-badge" onclick="openObjective('fin2')">
+ Proteger Margem
+ <small>&#8805; 40% · sujeito à confirmação com Financeiro</small>
+ </div>
+ <div class="obj-badge" onclick="openObjective('fin3')">
+ Otimizar CAC / CPA
+ <small>&#8722; 15% acumulado 2026 · baseline Q1</small>
+ </div>
+ <div class="obj-badge" onclick="openObjective('fin4')">
+ Maximizar LTV
+ <small>+20% valor ciclo · referência estratégica, sem baseline fechado</small>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <!-- CLIENTES -->
+ <div class="bsc-perspective cli-theme">
+ <div class="persp-header">
+ <div class="persp-label">
+ <span class="persp-icon"></span>
+ <div>
+ <div>Clientes</div>
+ <div class="pl-sub">Paciente · Família · Médico · Marca</div>
+ </div>
+ </div>
+ <div class="persp-objectives">
+ <div class="obj-badge" onclick="openObjective('cli1')">
+ Experiência Global Florence
+ <small>NPS &#8805; 85 · North Star de satisfação</small>
+ </div>
+ <div class="obj-badge" onclick="openObjective('cli2')">
+ Reputação da Marca
+ <small>Menções qualificadas · presença</small>
+ </div>
+ <div class="obj-badge" onclick="openObjective('cli3')">
+ Experiência do Médico
+ <small>NPS Médico &#8805; 70 · em validação</small>
+ </div>
+ <div class="obj-badge" onclick="openObjective('cli4')">
+ Reconhecimento por Valor
+ <small>Contratos c/ Cláusula · sem baseline</small>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <!-- PROCESSOS -->
+ <div class="bsc-perspective proc-theme">
+ <div class="persp-header">
+ <div class="persp-label">
+ <span class="persp-icon">️</span>
+ <div>
+ <div>Processos Internos</div>
+ <div class="pl-sub">Entrada · Qualificação · Avaliação · Continuidade</div>
+ </div>
+ </div>
+ <div class="persp-objectives">
+ <div class="obj-badge" onclick="openObjective('proc1')">
+ Acelerar Entrada
+ <small>Resp. humana &#8804; 2h · SLA em validação</small>
+ </div>
+ <div class="obj-badge" onclick="openObjective('proc2')">
+ Qualificar o Funil
+ <small>Lead &#8594; MQL · baseline Q1, meta &#8805; 35% Q2</small>
+ </div>
+ <div class="obj-badge" onclick="openObjective('proc3')">
+ 100% Rastreável
+ <small>UTM &#8805; 95% · pré-requisito estrutural</small>
+ </div>
+ <div class="obj-badge" onclick="openObjective('proc4')">
+ Avaliação &#8594; Internação
+ <small>&#8805; 35% · pendente OKR Avaliação</small>
+ </div>
+ <div class="obj-badge" onclick="openObjective('proc5')">
+ Continuidade Pós-Alta
+ <small>Régua D+3/D+7/D+30 · 100%</small>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <!-- APRENDIZADO -->
+ <div class="bsc-perspective apr-theme">
+ <div class="persp-header">
+ <div class="persp-label">
+ <span class="persp-icon"></span>
+ <div>
+ <div>Aprendizado &amp; Crescimento</div>
+ <div class="pl-sub">Dados · Governança · Inteligência · Alinhamento</div>
+ </div>
+ </div>
+ <div class="persp-objectives">
+ <div class="obj-badge" onclick="openObjective('apr1')">
+ Cultura de Dados
+ <small>100% Líderes c/ Dashboards</small>
+ </div>
+ <div class="obj-badge" onclick="openObjective('apr2')">
+ Capacitação Comercial
+ <small>Cert. Venda Consultiva · definir baseline</small>
+ </div>
+ <div class="obj-badge" onclick="openObjective('apr3')">
+ Inteligência de Mercado
+ <small>12 Relatórios/Ano</small>
+ </div>
+ <div class="obj-badge" onclick="openObjective('apr4')">
+ Alinhamento Inter-áreas
+ <small>Rituais OKR 100%</small>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ </div>
+</div>
+
+<!-- 
+ VIEW: CASCATA
+ -->
+<div class="view" id="view-cascade">
+ <div class="cascade-wrap">
+ <div class="cascade-diagram">
+ <div class="casc-main-title">Cascata Estratégica Florence 2026</div>
+
+ <!-- North Star -->
+ <div class="ns-box">
+ <div class="star"></div>
+ <strong>MÉTRICA NORTE</strong>
+ <div style="font-size:.92rem;color:var(--teal-lt);margin:.3rem 0;font-weight:600">Ocupação &#8805; 90% · NPS Global Florence &#8805; 85</div>
+ <small>SSA + Recife · 2026</small>
+ </div>
+ <div class="casc-arrow">&#8593;</div>
+
+ <!-- Financeira -->
+ <div class="casc-layer">
+ <div class="casc-layer-label" style="color:var(--fin)">Perspectiva Financeira</div>
+ <div class="casc-row">
+ <div class="casc-box" style="background:var(--fin-lt);border-color:var(--fin-bd);color:var(--fin)">
+ Aumentar Receita <span class="casc-meta">+15% vs 2025 · ref. calibração Q1</span>
+ </div>
+ <div class="casc-box" style="background:var(--fin-lt);border-color:var(--fin-bd);color:var(--fin)">
+ Proteger Margem <span class="casc-meta">&#8805; 40% · confirmar com Financeiro</span>
+ </div>
+ <div class="casc-box" style="background:var(--fin-lt);border-color:var(--fin-bd);color:var(--fin)">
+ Otimizar CAC / CPA <span class="casc-meta">&#8722; 15% acumulado 2026 · baseline Q1</span>
+ </div>
+ <div class="casc-box" style="background:var(--fin-lt);border-color:var(--fin-bd);color:var(--fin)">
+ Maximizar LTV <span class="casc-meta">+20% valor ciclo · referência estratégica, sem baseline fechado</span>
+ </div>
+ </div>
+ </div>
+ <div class="casc-arrow">&#8593;</div>
+
+ <!-- Clientes -->
+ <div class="casc-layer">
+ <div class="casc-layer-label" style="color:var(--cli)">Perspectiva Clientes</div>
+ <div class="casc-row">
+ <div class="casc-box" style="background:var(--cli-lt);border-color:var(--cli-bd);color:var(--cli)">
+ Experiência Global Florence <span class="casc-meta">NPS Global &#8805; 85 · North Star</span>
+ </div>
+ <div class="casc-box" style="background:var(--cli-lt);border-color:var(--cli-bd);color:var(--cli)">
+ NPS do Egresso (D+30) &#8805; 50 <span class="casc-meta">Pós-Alta · distinto do NPS Global</span>
+ </div>
+ <div class="casc-box" style="background:var(--cli-lt);border-color:var(--cli-bd);color:var(--cli)">
+ NPS Médico &#8805; 70 <span class="casc-meta">Referenciador · em validação</span>
+ </div>
+ <div class="casc-box" style="background:var(--cli-lt);border-color:var(--cli-bd);color:var(--cli)">
+ Reputação da Marca <span class="casc-meta">Menções qualificadas</span>
+ </div>
+ </div>
+ </div>
+ <div class="casc-arrow">&#8593;</div>
+
+ <!-- Processos -->
+ <div class="casc-layer">
+ <div class="casc-layer-label" style="color:var(--proc)">Perspectiva Processos Internos</div>
+ <div class="casc-row">
+ <div class="casc-box" style="background:var(--proc-lt);border-color:var(--proc-bd);color:var(--proc)">
+ Rastreamento UTM &#8805; 95% <span class="casc-meta">Pré-requisito estrutural</span>
+ </div>
+ <div class="casc-box" style="background:var(--proc-lt);border-color:var(--proc-bd);color:var(--proc)">
+ Qualificação Lead &#8594; MQL <span class="casc-meta">baseline Q1 · &#8805; 35% Q2</span>
+ </div>
+ <div class="casc-box" style="background:var(--proc-lt);border-color:var(--proc-bd);color:var(--proc)">
+ Avaliação &#8594; Internação <span class="casc-meta">&#8805; 35% · pendente OKR</span>
+ </div>
+ <div class="casc-box" style="background:var(--proc-lt);border-color:var(--proc-bd);color:var(--proc)">
+ Régua Pós-Alta 100% <span class="casc-meta">D+3 / D+7 / D+30</span>
+ </div>
+ </div>
+ </div>
+ <div class="casc-arrow">&#8593;</div>
+
+ <!-- Aprendizado -->
+ <div class="casc-layer">
+ <div class="casc-layer-label" style="color:var(--apr)">Perspectiva Aprendizado &amp; Crescimento</div>
+ <div class="casc-row">
+ <div class="casc-box" style="background:var(--apr-lt);border-color:var(--apr-bd);color:var(--apr)">
+ Cultura de Dados <span class="casc-meta">100% Líderes / Dashboards</span>
+ </div>
+ <div class="casc-box" style="background:var(--apr-lt);border-color:var(--apr-bd);color:var(--apr)">
+ Capacitação Comercial <span class="casc-meta">Cert. Venda Consultiva</span>
+ </div>
+ <div class="casc-box" style="background:var(--apr-lt);border-color:var(--apr-bd);color:var(--apr)">
+ Inteligência de Mercado <span class="casc-meta">12 Relatórios/Ano</span>
+ </div>
+ <div class="casc-box" style="background:var(--apr-lt);border-color:var(--apr-bd);color:var(--apr)">
+ Alinhamento Inter-áreas <span class="casc-meta">Rituais OKR 100%</span>
+ </div>
+ </div>
+ </div>
+
+ <!-- JORNADA DO PACIENTE FUNIL LINEAR -->
+ <div class="funnel-area-section">
+ <div class="funnel-area-title">Cascata por Área Jornada Integrada do Paciente</div>
+
+ <!-- Comm transversal -->
+ <div class="comm-transversal">
+ <span class="ct-label"> Comunicação Externa</span>
+ <span class="ct-text">Camada transversal de suporte reputacional e narrativo sustenta autoridade, clareza e proteção de marca ao longo de toda a jornada, sem etapa linear no funil do paciente.</span>
+ </div>
+
+ <!-- Main funnel -->
+ <div class="funnel-main-flow">
+ <div class="flow-step">
+ <span style="font-size:9px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)">Growth</span>
+ Lead Bruto
+ <small>UTM &#8805; 95%</small>
+ </div>
+ <div class="flow-arrow">&#8594;</div>
+ <div class="flow-step">
+ <span style="font-size:9px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)">Growth</span>
+ MQL
+ <small>Conv &#8805; 35%</small>
+ </div>
+ <div class="flow-arrow">&#8594;</div>
+ <div class="flow-step">
+ <span style="font-size:9px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)">Pré-Qualificação</span>
+ Lead Elegível
+ <small>100% encaminhados</small>
+ </div>
+ <div class="flow-arrow">&#8594;</div>
+ <div class="flow-step pending-step">
+ <span style="font-size:9px;text-transform:uppercase;letter-spacing:.07em">Avaliação</span>
+ Avaliação Assistencial
+ <small>OKR em consolidação</small>
+ </div>
+ <div class="flow-arrow">&#8594;</div>
+ <div class="flow-step">
+ <span style="font-size:9px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)">Internação</span>
+ Internação Efetivada
+ <small>&#8805; 35% conversão</small>
+ </div>
+ <div class="flow-arrow">&#8594;</div>
+ <div class="flow-step">
+ <span style="font-size:9px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)">Pós-Alta</span>
+ Régua + Continuidade
+ <small>D+3 · D+7 · D+30</small>
+ </div>
+ <div class="flow-arrow">&#8594;</div>
+ <div class="flow-step">
+ <span style="font-size:9px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)">RM + Pós-Alta</span>
+ Recorrência / LTV
+ <small>Reinternação &#8805; 15%</small>
+ </div>
+ </div>
+
+ <!-- Parallel: Ambulatório -->
+ <div style="display:flex;align-items:center;justify-content:center;gap:.4rem;flex-wrap:wrap;padding:.6rem 1rem;background:var(--teal-faint);border:1px solid var(--border);border-radius:6px;margin-bottom:.5rem;">
+ <span style="font-size:9.5px;font-weight:600;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-right:.3rem">Fluxo Ambulatório </span>
+ <div class="flow-step">Lead c/ Dor AMB<small>Pré-Qual KR03</small></div>
+ <div class="flow-arrow">&#8594;</div>
+ <div class="flow-step">Consulta / Reab / Neuro<small>Conv &#8805; 40%</small></div>
+ <div class="flow-arrow">&#8594;</div>
+ <div class="flow-step">Continuidade<small>LTV Ambulatorial</small></div>
+ <div class="flow-arrow">&#8594;</div>
+ <div class="flow-step">Reinternação<small>Funil Fechado</small></div>
+ </div>
+
+ <!-- Rel. Médico -->
+ <div style="display:flex;align-items:center;justify-content:center;gap:.4rem;flex-wrap:wrap;padding:.6rem 1rem;background:var(--apr-lt);border:1px solid var(--apr-bd);border-radius:6px;">
+ <span style="font-size:9.5px;font-weight:600;color:var(--apr);letter-spacing:.06em;text-transform:uppercase;margin-right:.3rem">Rel. Médico Canal de Retroalimentação </span>
+ <div class="flow-step">Médico Referenciador<small>NPS Médico &#8805; 70</small></div>
+ <div class="flow-arrow">&#8594;</div>
+ <div class="flow-step">Indicação Qualificada<small>sem baseline definido</small></div>
+ <div class="flow-arrow">&#8594;</div>
+ <div class="flow-step">Internação Originada RM<small>retroalimenta funil</small></div>
+ </div>
+
+ </div>
+ </div>
+
+ <div class="callout" style="margin-top:1.5rem">
+ <strong>Leitura da Cascata</strong> — A lógica Florence flui de baixo para cima no BSC e da esquerda para a direita no funil: Growth gera volume rastreável &#8594; Pré-Qualificação filtra e encaminha &#8594; Avaliação valida e interna &#8594; Pós-Alta retém e converte em Ambulatório &#8594; Relacionamento Médico retroalimenta o topo com novas indicações. Comunicação Externa sustenta toda a jornada como camada transversal de autoridade e marca. <strong>Pré-requisito estrutural de Q1:</strong> rastreamento UTM (Growth KR01) — sem cobertura &#8805; 95%, CAC e CPA permanecem incalculáveis.
+ </div>
+ </div>
+</div>
+
+<!-- 
+ VIEW: OKRs por ÁREA
+ -->
+<div class="view" id="view-okrs">
+ <div class="section">
+
+ <div class="callout">
+ <strong> OKRs por Área</strong> Clique em qualquer card para acessar os indicadores com detalhes de fonte, fórmula e notas metodológicas. Tags de maturidade indicam o nível de consolidação de cada KR.
+ </div>
+
+ <div class="mat-legend" style="margin-bottom:1.5rem">
+ <div class="mat-legend-title">Maturidade dos indicadores</div>
+ <div class="mat-legend-items">
+ <span class="mat mat-cons">Consolidado</span>
+ <span class="mat mat-val">Em validação</span>
+ <span class="mat mat-pend">Pendente definição</span>
+ <span class="mat mat-base">Sem baseline</span>
+ </div>
+ </div>
+
+ <div class="section-title"><span class="tag">ÁREA</span> Growth — Motor de Aquisição Digital Rastreável</div>
+ <div class="kr-grid" id="grid-growth"></div>
+
+ <div class="section-title" style="margin-top:2rem"><span class="tag">ÁREA</span> Pré-Qualificação — Jornada do Paciente</div>
+ <div class="kr-grid" id="grid-preq"></div>
+
+ <div class="section-title" style="margin-top:2rem">
+ <span class="tag">ÁREA</span> Avaliação — Elo Crítico de Internação
+ <span class="mat mat-pend" style="font-size:9px">OKR em consolidação</span>
+ </div>
+ <div class="kr-grid" id="grid-aval"></div>
+
+ <div class="section-title" style="margin-top:2rem"><span class="tag">ÁREA</span> Pós-Alta — Vínculo e LTV do Egresso</div>
+ <div class="kr-grid" id="grid-posalta"></div>
+
+ <div class="section-title" style="margin-top:2rem"><span class="tag">ÁREA</span> Relacionamento Médico</div>
+ <div class="kr-grid" id="grid-rm"></div>
+
+ <div class="section-title" style="margin-top:2rem"><span class="tag">ÁREA</span> Comunicação Externa — Autoridade e Narrativa</div>
+ <div class="kr-grid" id="grid-comm"></div>
+
+ <!-- Governance -->
+ <div class="gov-block" id="gov-block">
+ <div class="gov-header" onclick="toggleGov()">
+ <span class="gh-icon"></span>
+ <span class="gh-title">Notas Metodológicas e Governança de Medição</span>
+ <span class="gh-sub">Fontes · fórmulas · dependências · observações críticas</span>
+ <span class="gh-chev open" id="gov-chev">&#9662;</span>
+ </div>
+ <div class="gov-body" id="gov-wrap">
+ <table class="gov-table">
+ <thead>
+ <tr>
+ <th class="gt-ind">Indicador</th>
+ <th class="gt-persp">Perspectiva</th>
+ <th class="gt-fonte">Fonte do Dado</th>
+ <th class="gt-freq">Freq.</th>
+ <th>Fórmula / Cálculo</th>
+ <th style="width:200px">Observações e Dependências</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr>
+ <td class="gt-ind">% UTM Válido nos Cliques de WhatsApp <span class="mat mat-cons">Consolidado</span></td>
+ <td class="gt-persp">Processos</td>
+ <td class="gt-fonte">Meta Ads, Google Ads, Taboola, Outbrain · eventos WhatsApp Click</td>
+ <td class="gt-freq">Mensal</td>
+ <td>(Cliques com UTM source + medium + campaign ÷ Total de cliques mídia paga) × 100</td>
+ <td>Pré-requisito estrutural. Sem cobertura &#8805; 95%, CPL e CPA são incalculáveis. Conferência semanal com Quântica obrigatória.</td>
+ </tr>
+ <tr>
+ <td class="gt-ind">Taxa de Conversão Lead &#8594; MQL <span class="mat mat-val">Em validação</span></td>
+ <td class="gt-persp">Processos</td>
+ <td class="gt-fonte">RD Station CRM relatório de Oportunidades vs. Leads brutos</td>
+ <td class="gt-freq">Mensal</td>
+ <td>(MQLs gerados no mês ÷ Total de Leads brutos) × 100</td>
+ <td>Definição formal de MQL obrigatória antes de ativar meta. Baseline Q1 &#8594; meta &#8805; 35% a partir de Q2. Excluir reativações de meses anteriores.</td>
+ </tr>
+ <tr>
+ <td class="gt-ind">Taxa de Conversão MQL &#8594; Avaliação <span class="mat mat-val">Em validação</span></td>
+ <td class="gt-persp">Processos</td>
+ <td class="gt-fonte">RD Station status "Encaminhado para Avaliação"</td>
+ <td class="gt-freq">Mensal</td>
+ <td>(MQLs encaminhados para Avaliação ÷ MQLs do mês) × 100</td>
+ <td>Requer status implementado no CRM e protocolo de transbordo definido. Baseline Q1 &#8594; meta &#8805; 50% a partir de Q2.</td>
+ </tr>
+ <tr>
+ <td class="gt-ind">Conversão Encaminhamento &#8594; Internação <span class="mat mat-pend">Pendente OKR Aval.</span></td>
+ <td class="gt-persp">Processos</td>
+ <td class="gt-fonte">CRM de Jornada + sistema hospitalar (registro de internação)</td>
+ <td class="gt-freq">Mensal</td>
+ <td>(Leads Elegíveis que resultaram em internação ÷ Total encaminhados à Avaliação) × 100</td>
+ <td>Meta de &#8805; 35% é uma referência preliminar. Pendente OKR formal da Avaliação. Requer integração CRM &#8596; sistema hospitalar.</td>
+ </tr>
+ <tr>
+ <td class="gt-ind">NPS Global Florence <span class="mat mat-base">Sem baseline</span></td>
+ <td class="gt-persp">Clientes</td>
+ <td class="gt-fonte">Pesquisa estruturada (canal a definir) · NPS = % Promotores (9–10) &#8722; % Detratores (0–6)</td>
+ <td class="gt-freq">Trimestral</td>
+ <td>% Promotores (9–10) &#8722; % Detratores (0–6) · amostra mínima estatisticamente relevante</td>
+ <td>Métrica Norte geral. Distinto do NPS do Egresso (D+30). Metodologia e canal de coleta a definir com Qualidade / Assistência.</td>
+ </tr>
+ <tr>
+ <td class="gt-ind">NPS do Egresso (D+30) <span class="mat mat-base">Sem baseline</span></td>
+ <td class="gt-persp">Clientes</td>
+ <td class="gt-fonte">Pesquisa ativa no D+30 via WhatsApp (1 pergunta + campo aberto opcional)</td>
+ <td class="gt-freq">Mensal</td>
+ <td>% Promotores (9–10) &#8722; % Detratores (0–6) · amostra mínima: 20 respostas/mês</td>
+ <td>Distinto do NPS Global Florence. Meta 50 (escala NPS), não 85. Separar por tipo de alta: com continuidade AMB vs sem.</td>
+ </tr>
+ <tr>
+ <td class="gt-ind">Continuidade Pós-Alta Conv. Consultas <span class="mat mat-val">Em validação</span></td>
+ <td class="gt-persp">Processos</td>
+ <td class="gt-fonte">Sistema financeiro + agenda Ambulatório + planilha de egressos</td>
+ <td class="gt-freq">Mensal</td>
+ <td>(Egressos que realizaram pagamento da 1ª consulta ÷ Egressos elegíveis para consulta) × 100</td>
+ <td>Fechamento = pagamento realizado, não agendamento. Consulta cortesia registrar separadamente não entra no numerador.</td>
+ </tr>
+ <tr>
+ <td class="gt-ind">Taxa de Reinternação (origem Pós-Alta) <span class="mat mat-base">Sem baseline</span></td>
+ <td class="gt-persp">Financeira</td>
+ <td class="gt-fonte">Sistema hospitalar + CRM · cruzamento egresso × reinternação em até 90 dias</td>
+ <td class="gt-freq">Mensal</td>
+ <td>(Egressos ativos na régua que reinternaram em 90 dias ÷ Total de egressos ativos) × 100</td>
+ <td>Excluir reinternações de emergência sem relação com o acompanhamento. Requer integração entre CRM e sistema de internação.</td>
+ </tr>
+ <tr>
+ <td class="gt-ind">% Famílias em Luto com Acompanhamento Pós-Óbito <span class="mat mat-pend">Pendente protocolo clínico</span></td>
+ <td class="gt-persp">Clientes</td>
+ <td class="gt-fonte">CRM / plataforma de comunicação a definir com equipe clínica</td>
+ <td class="gt-freq">Mensal</td>
+ <td>(Famílias de óbitos com ao menos um contato pós-óbito ÷ Total de famílias elegíveis) × 100</td>
+ <td> Indicador pendente de definição operacional. Questões abertas: quem realiza o contato, quais pontos (D+3, D+30, D+90), conteúdo do contato. Pré-condição: protocolo clínico aprovado.</td>
+ </tr>
+ <tr>
+ <td class="gt-ind">CPL / CPA Custo por Lead / MQL <span class="mat mat-val">Em validação</span></td>
+ <td class="gt-persp">Financeira</td>
+ <td class="gt-fonte">Plataformas de mídia (Meta, Google, Taboola, Outbrain) + RD Station</td>
+ <td class="gt-freq">Mensal</td>
+ <td>Investimento total em mídia ÷ Leads Atribuídos (UTM) · Q1: CPL como proxy; Q2+: CPA (÷ MQLs)</td>
+ <td>Escopo de custos: somente mídia paga. Exclui produção de criativo e honorários de agência. CPL como proxy até rastreamento end-to-end estiver ativo.</td>
+ </tr>
+ </tbody>
+ </table>
+ </div>
+ </div>
+
+ </div>
+</div>
+
+<!-- 
+ DATA MODEL
+ -->
+<script>
+// 
+// DATA
+// 
+const DATA = {
+ notes: {},
+
+ objectives: {
+ fin1: {
+ label:'Aumentar Receita', target:'+15% vs 2025 · referência para calibração Q1', persp:'Financeira',
+ desc:'Crescimento de receita total via maior volume de internações (ocupação ≥90%), crescimento do Ambulatório e retenção pós-alta (LTV). Meta de +15% é referência para calibração após baseline Q1.',
+ areas:['Growth','Pré-Qualificação','Pós-Alta'],
+ krs:['g_kr02','g_kr04','pq_kr02','pa_kr02'],
+ },
+ fin2:{
+ label:'Proteger Margem', target:'≥ 40% · sujeito à confirmação com Financeiro', persp:'Financeira',
+ desc:'Controlar custos de aquisição (CAC/CPA), reduzir desperdício de leads não rastreados e evitar readmissões não planejadas. Meta percentual sujeita à confirmação com área Financeira.',
+ areas:['Growth'],
+ krs:['g_kr03'],
+ },
+ fin3:{
+ label:'Otimizar CAC / CPA', target:'−15% acumulado 2026 · baseline Q1', persp:'Financeira',
+ desc:'Reduzir o custo por aquisição (−15% acumulado) via rastreamento UTM confiável, qualificação de leads e eficiência de mídia. Q1: CPL como proxy. Q2+: CPA por MQL.',
+ areas:['Growth'],
+ krs:['g_kr01','g_kr03'],
+ },
+ fin4:{
+ label:'Maximizar LTV', target:'+20% valor ciclo · referência estratégica, sem baseline fechado', persp:'Financeira',
+ desc:'Aumentar o valor vitalício de cada paciente via continuidade ambulatorial e reinternação qualificada. +20% é referência estratégica indicativa; baseline ainda não apurado.',
+ areas:['Pós-Alta','Pré-Qualificação'],
+ krs:['pa_kr02','pa_kr03','pq_kr03'],
+ },
+ cli1:{
+ label:'Experiência Global Florence', target:'NPS Global ≥ 85 · North Star de satisfação', persp:'Clientes',
+ desc:'Métrica Norte de satisfação geral — distinta do NPS do Egresso (D+30) ≥ 50, que é indicador operacional de Pós-Alta. Metodologia e canal de coleta a definir com Qualidade e Assistência.',
+ areas:['Pós-Alta','Todas'],
+ krs:['pa_kr03'],
+ },
+ cli2:{
+ label:'Reputação da Marca', target:'Presença qualificada e consistência narrativa', persp:'Clientes',
+ desc:'Autoridade digital, presença qualificada nos canais externos e consistência narrativa. Meta de "Top 3 em Menções" substituída por presença qualificada sem baseline para rankear menções.',
+ areas:['Comunicação Externa'],
+ krs:['c_kr01','c_kr02','c_kr03'],
+ },
+ cli3:{
+ label:'Experiência do Médico', target:'NPS Médico ≥ 70 · em validação', persp:'Clientes',
+ desc:'Médico referenciador como cliente estratégico. Relacionamento estruturado e régua ativa. Meta de NPS ≥ 70 em validação — sem baseline histórico.',
+ areas:['Relacionamento Médico'],
+ krs:['rm_kr01','rm_kr02'],
+ },
+ cli4:{
+ label:'Reconhecimento por Valor', target:'Contratos c/ Cláusula definir baseline Q1', persp:'Clientes',
+ desc:'Posicionamento premium com médicos referenciadores. Meta de 30% substituída por "definir baseline Q1 e ativar meta Q2" sem referência histórica.',
+ areas:['Relacionamento Médico'],
+ krs:['rm_kr03'],
+ },
+ proc1:{
+ label:'Acelerar Entrada', target:'Resposta humana ≤ 2h úteis · SLA em validação', persp:'Processos',
+ desc:'Velocidade de primeiro contato humano. Resposta automática de BOT excluída. TMR ≤ 10 min substituído por ≤ 2h úteis (que é a meta real do OKR de Pré-Qualificação).',
+ areas:['Pré-Qualificação'],
+ krs:['pq_kr01'],
+ },
+ proc2:{
+ label:'Qualificar o Funil', target:'Lead→MQL: baseline Q1 · meta ≥35% Q2', persp:'Processos',
+ desc:'Taxa de conversão Lead→MQL ≥35% e Lead→Avaliação ≥50%. Qualificação eficiente sem perda por falha de processo. Metas ativadas a partir de Q2, após baseline Q1.',
+ areas:['Growth','Pré-Qualificação'],
+ krs:['g_kr02','g_kr04','pq_kr01','pq_kr02'],
+ },
+ proc3:{
+ label:'100% Rastreável', target:'UTM ≥ 95% · pré-requisito estrutural', persp:'Processos',
+ desc:'Fundação de toda a cadeia de medição. Sem UTM válido ≥ 95%, CPA e CAC não são calculáveis. Prioridade máxima de execução Q1.',
+ areas:['Growth'],
+ krs:['g_kr01'],
+ },
+ proc4:{
+ label:'Avaliação → Internação', target:'≥ 35% · pendente OKR formal da Avaliação', persp:'Processos',
+ desc:'Taxa de conversão Encaminhamento → Internação Efetivada. Meta de 35% é referência preliminar da Pré-Qualificação. Pendente aprovação do OKR formal da área de Avaliação.',
+ areas:['Avaliação','Pré-Qualificação'],
+ krs:['av_kr01'],
+ },
+ proc5:{
+ label:'Continuidade Pós-Alta', target:'Régua D+3/D+7/D+30 · 100% execução', persp:'Processos',
+ desc:'Execução integral da régua de acompanhamento. Pré-requisito para NPS do Egresso, reinternação e LTV.',
+ areas:['Pós-Alta'],
+ krs:['pa_kr01','pa_kr03'],
+ },
+ apr1:{
+ label:'Cultura de Dados', target:'100% Líderes c/ Dashboards ativos', persp:'Aprendizado',
+ desc:'Todos os líderes de área com acesso e uso ativo de dashboards de OKR.',
+ areas:['Todas'], krs:[],
+ },
+ apr2:{
+ label:'Capacitação Comercial', target:'Cert. Venda Consultiva definir baseline', persp:'Aprendizado',
+ desc:'Time de Pré-Qualificação e Pós-Alta certificado em venda consultiva para saúde. Meta quantitativa a definir após baseline Q1.',
+ areas:['Pré-Qualificação','Pós-Alta'], krs:[],
+ },
+ apr3:{
+ label:'Inteligência de Mercado', target:'12 Relatórios/Ano', persp:'Aprendizado',
+ desc:'Relatórios mensais alimentando decisões estratégicas. Inclui governança de agentes de IA da Comunicação Externa.',
+ areas:['Growth','Comunicação Externa'], krs:['c_kr04'],
+ },
+ apr4:{
+ label:'Alinhamento Inter-áreas', target:'Rituais OKR 100%', persp:'Aprendizado',
+ desc:'Rituais de OKR executados 100% reuniões semanais de área e revisão mensal cross-funcional.',
+ areas:['Todas'], krs:[],
+ },
+ },
+
+ krs: {
+ // GROWTH 
+ g_kr01:{
+ area:'Growth', kr:'KR 01', maturity:'cons',
+ title:'Rastreamento Digital: ≥95% cliques WhatsApp com UTM válido e 100% campanhas com checklist aprovado',
+ objective:'Pré-requisito estrutural de todo o rastreamento de Growth. Sem UTM confiável, nenhum indicador de eficiência (CPL, CPA) é calculável com precisão.',
+ bscLink:['proc3','fin3'],
+ indicators:[
+ {name:'% Cliques WhatsApp com UTM Válido e Completo', meta:'≥ 95%', freq:'Mensal', mat:'cons', source:'Meta Ads, Google Ads, Taboola, Outbrain · eventos WhatsApp Click'},
+ {name:'% Campanhas com Checklist UTM Aprovado', meta:'100%', freq:'Mensal', mat:'cons', source:'Log de checklist pré-publicação da Quântica'},
+ ]
+ },
+ g_kr02:{
+ area:'Growth', kr:'KR 02', maturity:'val',
+ title:'Volume de MQLs: crescimento progressivo (baseline Q1 → +30% a partir de Q2) com ≥80% qualidade de entrada',
+ objective:'Ampliar oportunidades ativas no funil. Meta de +30% condicionada ao baseline real de Q1 e definição formal de MQL com Avaliação e Comercial.',
+ bscLink:['fin1','proc2'],
+ indicators:[
+ {name:'Volume Mensal de MQLs (SSA + REC)', meta:'Baseline Q1 +30% Q2', freq:'Mensal', mat:'val', source:'RD Station CRM painel de Oportunidades'},
+ {name:'Taxa de Qualidade de Entrada (% Leads Válidos)', meta:'≥ 80%', freq:'Mensal', mat:'val', source:'RD Station campo motivo de descarte'},
+ {name:'Taxa de Conversão Lead → MQL', meta:'Baseline Q1 → ≥ 35% Q2', freq:'Mensal', mat:'val', source:'RD Station Leads vs. Oportunidades'},
+ ]
+ },
+ g_kr03:{
+ area:'Growth', kr:'KR 03', maturity:'val',
+ title:'Eficiência de Investimento: CPL em Q1 como proxy; migrar para CPA a partir de Q2 (−15% acumulado 2026)',
+ objective:'Controlar custo de aquisição por canal. Q1: CPL como proxy enquanto rastreamento end-to-end não está operacional. Q2+: CPA por MQL.',
+ bscLink:['fin2','fin3'],
+ indicators:[
+ {name:'CPL Médio por Lead Atribuído (R$)', meta:'Baseline Q1 → −15% acumulado 2026', freq:'Mensal', mat:'val', source:'Plataformas de mídia + RD Station'},
+ {name:'CPA por MQL Custo por Lead Qualificado (R$)', meta:'Meta Q2 a calibrar após infra', freq:'Mensal a partir Q2', mat:'base', source:'Plataformas de mídia + RD Station (após UTM end-to-end)'},
+ ]
+ },
+ g_kr04:{
+ area:'Growth', kr:'KR 04', maturity:'val',
+ title:'Conversão do Funil: MQL → Avaliação (baseline Q1 → ≥50% Q2) e gap SSA×REC ≤10 p.p.',
+ objective:'Medir eficiência de transbordo Growth → Avaliação e paridade entre unidades. Metas ativadas a partir de Q2.',
+ bscLink:['fin1','proc2'],
+ indicators:[
+ {name:'Taxa Conversão MQL → Solicitação de Avaliação', meta:'Baseline Q1 → ≥ 50% Q2', freq:'Mensal', mat:'val', source:'RD Station status "Encaminhado para Avaliação"'},
+ {name:'Gap de Conversão Lead → MQL entre SSA e REC (p.p.)', meta:'≤ 10 p.p. ao fim de 2026', freq:'Mensal', mat:'base', source:'RD Station segmentado por unidade'},
+ ]
+ },
+ // PRÉ-QUALIFICAÇÃO 
+ pq_kr01:{
+ area:'Pré-Qualificação', kr:'KR 01', maturity:'cons',
+ title:'Sem perda por falha de processo: dor identificada em ≥95% dos responsivos; resposta humana ≤2h; índice de perda ≤5%',
+ objective:'Garantir cobertura total do atendimento. Nenhum lead com potencial perdido por demora ou ausência de qualificação.',
+ bscLink:['proc1','proc2'],
+ indicators:[
+ {name:'% Leads Responsivos com Dor Identificada', meta:'≥ 95%', freq:'Semanal', mat:'cons', source:'CRM / planilha de controle de leads'},
+ {name:'Tempo Médio 1ª Resposta Humana (Recepção / Fale Conosco)', meta:'≤ 2h úteis', freq:'Semanal', mat:'val', source:'CRM timestamp chegada vs. 1ª resposta humana (excluir BOT)'},
+ {name:'Índice de Perda por Falha na Interação', meta:'≤ 5%', freq:'Semanal', mat:'cons', source:'CRM leads sem dor identificada após 3 tentativas + 72h'},
+ ]
+ },
+ pq_kr02:{
+ area:'Pré-Qualificação', kr:'KR 02', maturity:'cons',
+ title:'100% Leads Elegíveis encaminhados à Avaliação em ≤1h. Conversão Encaminhamento → Internação ≥35%',
+ objective:'Elo direto entre Pré-Qualificação e ocupação de leitos. Zero Lead Elegível perdido por omissão ou atraso.',
+ bscLink:['fin1','proc2'],
+ indicators:[
+ {name:'Encaminhamento para Avaliação', meta:'100%', freq:'Semanal', mat:'cons', source:'CRM status "encaminhado à Avaliação"'},
+ {name:'Conversão Lead Qualificado Lead Elegível', meta:'100%', freq:'Semanal', mat:'cons', source:'CRM campo elegível completo'},
+ {name:'% Encaminhamentos em 1h após dor+solução', meta:'100%', freq:'Semanal', mat:'val', source:'CRM timestamps dor identificada vs. encaminhamento'},
+ {name:'Taxa de Leads c/ Solução Florence Reativados', meta:'100%', freq:'Semanal', mat:'val', source:'CRM leads qualificados em silêncio reengajados'},
+ {name:'Conversão Encaminhamento → Internação Efetivada', meta:'≥ 35% · referência, pendente OKR Avaliação', freq:'Mensal', mat:'pend', source:'CRM + sistema hospitalar (requer integração)'},
+ ]
+ },
+ pq_kr03:{
+ area:'Pré-Qualificação', kr:'KR 03', maturity:'val',
+ title:'Conversão ≥40% em Ambulatório para leads com dor AMB. Resolução da Demanda Inicial ≥70%',
+ objective:'Alimentar receita do Ambulatório e criar vínculo que pode gerar futuras internações.',
+ bscLink:['fin4','fin1'],
+ indicators:[
+ {name:'Conversão Dor AMB Ação Ambulatório (consulta/pacote)', meta:'≥ 40%', freq:'Semanal', mat:'val', source:'CRM + agenda do Ambulatório'},
+ {name:'Taxa de Fechamento sobre Orçamentos Solicitados', meta:'≥ 50% · indicador em monitoramento silencioso Q1', freq:'Semanal', mat:'val', source:'CRM campo "fechou após orçamento"'},
+ {name:'Resolução da Demanda Inicial', meta:'≥ 70%', freq:'Quinzenal', mat:'val', source:'Follow-up ativo por amostra de leads encerrados'},
+ ]
+ },
+ pq_kr04:{
+ area:'Pré-Qualificação', kr:'KR 04', maturity:'val',
+ title:'≥80% dos Leads Estacionados com dor identificada, repassados a Novos Negócios',
+ objective:'Garantir que leads sem solução imediata Florence gerem inteligência para reativação futura e alimentem pipeline de novos negócios.',
+ bscLink:['apr3'],
+ indicators:[
+ {name:'% Leads Estacionados com Dor Identificada e Registrada', meta:'≥ 80%', freq:'Semanal', mat:'val', source:'CRM status estacionado + campo dor preenchido'},
+ ]
+ },
+ // AVALIAÇÃO (em consolidação) 
+ av_kr01:{
+ area:'Avaliação', kr:'KR 01', maturity:'pend',
+ title:'Conversão de Leads Elegíveis em Internação Efetivada — OKR em consolidação pela área',
+ objective:'Elo crítico do funil entre Pré-Qualificação e ocupação de leitos. OKR formal da Avaliação ainda em construção. Indicadores abaixo são referências preliminares.',
+ bscLink:['proc4','fin1'],
+ indicators:[
+ {name:'Taxa de Conversão Encaminhamento → Internação', meta:'≥ 35% — referência, pendente validação área', freq:'Mensal', mat:'pend', source:'Integração CRM sistema hospitalar (a instrumentar)'},
+ {name:'Lead Time Funil Decisão de Internação', meta:'Meta condicionada à instrumentação iniciar medição Q1', freq:'Mensal', mat:'pend', source:'CRM timestamps entrada vs. decisão final (a configurar)'},
+ {name:'NPS do Médico Referenciador na Avaliação', meta:'A definir com área', freq:'Trimestral', mat:'pend', source:'Pesquisa direta protocolo a definir'},
+ ]
+ },
+ // PÓS-ALTA 
+ pa_kr01:{
+ area:'Pós-Alta', kr:'KR 01', maturity:'val',
+ title:'Cobertura qualificada da transição: visita em ≥90% dos egressos, ≥80% com ≥72h de antecedência',
+ objective:'Base de toda a cadeia pós-alta. Sem visita registrada, não há possibilidade de conversa de continuidade.',
+ bscLink:['proc5'],
+ indicators:[
+ {name:'% Pacientes Elegíveis com Visita Pré-Alta', meta:'≥ 90%', freq:'Semanal', mat:'val', source:'Planilha de controle de visitas pré-alta'},
+ {name:'% Visitas com ≥ 72h de Antecedência', meta:'≥ 80%', freq:'Semanal', mat:'val', source:'Sistema de agendamento / planilha de visitas'},
+ {name:'% Visitas com ≥ 24h de Antecedência (piso mínimo)', meta:'100%', freq:'Semanal', mat:'cons', source:'Mesma fonte piso não-negociável'},
+ ]
+ },
+ pa_kr02:{
+ area:'Pós-Alta', kr:'KR 02', maturity:'val',
+ title:'Continuidade assistencial: ≥50% conversão Consultas, ≥33% Reab/Neuro, ≥90% não-adesões mapeadas',
+ objective:'Receita direta ambulatorial + vínculo que gera nova internação.',
+ bscLink:['fin1','fin4'],
+ indicators:[
+ {name:'Taxa Conversão Venda — Consultas (1ª consulta paga)', meta:'≥ 50%', freq:'Mensal', mat:'val', source:'Sistema financeiro + agenda AMB + planilha egressos'},
+ {name:'Taxa Conversão Venda — Reab / Neuromodulação (pagto. antecipado)', meta:'≥ 33%', freq:'Mensal', mat:'val', source:'Sistema financeiro + planilha egressos'},
+ {name:'% Não Adesões com Motivo Mapeado (diagnóstico de perdas)', meta:'≥ 90%', freq:'Mensal', mat:'val', source:'Checklist pós-visita campo obrigatório de motivo'},
+ ]
+ },
+ pa_kr03:{
+ area:'Pós-Alta', kr:'KR 03', maturity:'val',
+ title:'Régua 100% executada (D+3/D+7/D+30). NPS do Egresso (D+30) ≥50. Reinternação ≥15%. Famílias em luto ≥80%',
+ objective:'Vínculo de longo prazo. Egresso responsivo no D+30 é candidato ativo para reinternação ou indicação. NPS do Egresso (meta ≥ 50) distinto do NPS Global Florence (meta ≥ 85).',
+ bscLink:['cli1','fin4','proc5'],
+ indicators:[
+ {name:'% Pontos de Contato da Régua Realizados (D+3/D+7/D+30)', meta:'100%', freq:'Mensal', mat:'val', source:'Plataforma de comunicação Meta/WhatsApp'},
+ {name:'Responsividade D+3 — engajamento imediato', meta:'≥ 60%', freq:'Semanal', mat:'val', source:'Plataforma resposta ativa (conteúdo, não só leitura)'},
+ {name:'Responsividade D+7 — sustentação do vínculo', meta:'≥ 45%', freq:'Semanal', mat:'val', source:'Mesma fonte'},
+ {name:'Responsividade D+30 — proxy de vínculo real', meta:'≥ 30%', freq:'Mensal', mat:'val', source:'Mesma fonte · janela ±48h'},
+ {name:'% Egressos Acompanhados além do D+30', meta:'≥ 70%', freq:'Mensal', mat:'val', source:'CRM / plataforma de comunicação'},
+ {name:'% Famílias em Luto com Acompanhamento Pós-Óbito', meta:'≥ 80% — pendente protocolo clínico', freq:'Mensal', mat:'pend', source:'CRM pendente definição de protocolo com Psicologia'},
+ {name:'NPS do Egresso (D+30) — distinto do NPS Global', meta:'≥ 50 NPS · amostra mín. 20 resp./mês', freq:'Mensal', mat:'base', source:'Pesquisa WhatsApp D+30 pergunta única + campo aberto'},
+ {name:'Taxa de Reinternação de Egressos (90 dias)', meta:'≥ 15%', freq:'Mensal', mat:'base', source:'Sistema hospitalar + CRM (requer integração)'},
+ ]
+ },
+ // REL. MÉDICO 
+ rm_kr01:{
+ area:'Rel. Médico', kr:'KR 01', maturity:'val',
+ title:'NPS Médico ≥ 70: relacionamento estruturado com médicos referenciadores — em validação',
+ objective:'Médico satisfeito indica. Meta de NPS ≥ 70 em validação — sem baseline histórico. Cada indicação pode valer múltiplas internações.',
+ bscLink:['cli3'],
+ indicators:[
+ {name:'NPS Médico Referenciador', meta:'≥ 70 — em validação · sem baseline', freq:'Trimestral', mat:'val', source:'Pesquisa direta com médicos estratégicos'},
+ ]
+ },
+ rm_kr02:{
+ area:'Rel. Médico', kr:'KR 02', maturity:'val',
+ title:'Régua de relacionamento ativa: ≥90% médicos estratégicos com contato registrado',
+ objective:'Manter presença e top-of-mind junto ao médico referenciador.',
+ bscLink:['cli3'],
+ indicators:[
+ {name:'% Médicos Estratégicos com Contato Ativo', meta:'≥ 90%', freq:'Mensal', mat:'val', source:'CRM de Relacionamento Médico'},
+ {name:'% Médicos Encaminhadores com Ciclo Recorrente em 90 dias', meta:'≥ 30% — definir baseline Q1', freq:'Mensal', mat:'base', source:'CRM · cruzamento encaminhamento × período'},
+ {name:'% Médicos Inativos Reativados (elegíveis)', meta:'≥ 50% dos elegíveis — sem baseline', freq:'Trimestral', mat:'base', source:'CRM médicos mornos/frios com ação de reativação'},
+ ]
+ },
+ rm_kr03:{
+ area:'Rel. Médico', kr:'KR 03', maturity:'base',
+ title:'Contratos com Cláusula de Valor definir baseline Q1 e ativar meta Q2',
+ objective:'Reconhecimento por qualidade assistencial, diferenciação de concorrentes. Meta de 30% substituída por calibração Q1, pois não há baseline histórico.',
+ bscLink:['cli4','fin2'],
+ indicators:[
+ {name:'% Contratos com Cláusula de Valor', meta:'Definir baseline Q1 · ativar meta Q2', freq:'Trimestral', mat:'base', source:'Área Comercial / Diretoria'},
+ {name:'% Médicos Novos Encaminhando em 90 dias (Greenfield)', meta:'≥ 20% dos ativados no período — sem baseline', freq:'Trimestral', mat:'base', source:'CRM médicos novos ativados × encaminhamento'},
+ ]
+ },
+ // COMUNICAÇÃO 
+ c_kr01:{
+ area:'Comunicação Externa', kr:'KR 01', maturity:'val',
+ title:'100% dos ativos críticos externos atualizados e com narrativa consistente',
+ objective:'Reduzir ruído narrativo. Consistência em todos os pontos de contato externos.',
+ bscLink:['cli2'],
+ indicators:[
+ {name:'% Ativos Críticos Externos Atualizados (site, redes, WhatsApp Business)', meta:'100%', freq:'Trimestral', mat:'val', source:'Checklist mestre de ativos críticos'},
+ {name:'% Páginas do Site com Narrativa Atualizada', meta:'100%', freq:'Mensal', mat:'val', source:'Inventário do site + checklist de narrativa'},
+ {name:'Presença Consistente em Diretórios Externos', meta:'100%', freq:'Mensal', mat:'val', source:'Google Meu Negócio, Doctoralia e outros diretórios'},
+ ]
+ },
+ c_kr02:{
+ area:'Comunicação Externa', kr:'KR 02', maturity:'val',
+ title:'Qualidade narrativa: mensagens-chave definidas e Índice de Consistência ≥4,0/5,0',
+ objective:'Base narrativa oficial que dá autonomia ao time e parceiros.',
+ bscLink:['cli2'],
+ indicators:[
+ {name:'% Mensagens-Chave por Público Definidas e Publicadas', meta:'100%', freq:'Trimestral', mat:'val', source:'Guia narrativo / playbook externo'},
+ {name:'Índice de Consistência Narrativa nos Canais Externos (1–5)', meta:'≥ 4,0 / 5,0', freq:'Mensal', mat:'val', source:'Auditoria amostral · 10 peças/canal/mês'},
+ {name:'FAQ Externo Publicado e Atualizado', meta:'100%', freq:'Trimestral', mat:'val', source:'Mapeamento Comercial + publicação'},
+ ]
+ },
+ c_kr03:{
+ area:'Comunicação Externa', kr:'KR 03', maturity:'val',
+ title:'Eficiência e reputação: 100% entregas do quarter, presença em veículos, 100% taxa de resposta',
+ objective:'Proteger autoridade da marca através de interações ágeis e presença qualificada.',
+ bscLink:['cli2'],
+ indicators:[
+ {name:'% Ativos Externos Entregues no Quarter', meta:'100%', freq:'Mensal', mat:'val', source:'Plano editorial / controle de entregas'},
+ {name:'Presença Qualificada em Veículos e Canais Prioritários', meta:'100%', freq:'Mensal', mat:'val', source:'Matriz de canais + clipping/monitoramento'},
+ {name:'Taxa de Resposta em Canais Externos', meta:'100%', freq:'Mensal', mat:'val', source:'Relatório de interações dos canais externos'},
+ {name:'Inserções de Imprensa com Mensagem Prioritária', meta:'≥ 80%', freq:'Mensal', mat:'val', source:'Clipping / assessoria + revisão de aderência'},
+ ]
+ },
+ c_kr04:{
+ area:'Comunicação Externa', kr:'KR 04', maturity:'val',
+ title:'Governança de IA: 100% dos agentes críticos otimizados por trimestre',
+ objective:'Garantir acurácia, segurança e melhoria contínua no uso de IA generativa.',
+ bscLink:['apr3'],
+ indicators:[
+ {name:'% Agentes de IA Críticos com Revisão de Prompt Concluída', meta:'100% / trimestre', freq:'Trimestral', mat:'val', source:'Log de governança dos agentes'},
+ ]
+ },
+ },
+
+ matLabels: {
+ cons: { label: 'Consolidado', cls: 'mat-cons' },
+ val: { label: 'Em validação', cls: 'mat-val' },
+ pend: { label: 'Pendente definição', cls: 'mat-pend' },
+ base: { label: 'Sem baseline', cls: 'mat-base' },
+ },
+};
+
+// 
+// HELPERS
+// 
+function matTag(m) {
+ const d = DATA.matLabels[m];
+ if (!d) return '';
+ return `<span class="mat ${d.cls}">${d.label}</span>`;
+}
+
+// 
+// RENDER KR CARD
+// 
+function renderKRCard(krId) {
+ const kr = DATA.krs[krId];
+ if (!kr) return '';
+ const isPending = kr.maturity === 'pend';
+ const inds = kr.indicators.map(i =>
+ `<div class="ind-row">
+ <div class="ind-dot"></div>
+ <div class="ind-name">${i.name} ${matTag(i.mat)}</div>
+ <div class="ind-meta">${i.meta}</div>
+ </div>`
+ ).join('');
+ const bscChips = kr.bscLink.map(b => {
+ const obj = DATA.objectives[b];
+ return obj ? `<span class="meta-chip">${obj.persp}: ${obj.label}</span>` : '';
+ }).join('');
+ return `
+ <div class="kr-card${isPending ? ' area-pending' : ''}" onclick="openKR('${krId}')">
+ ${isPending ? `<div class="pending-banner"> OKR em consolidação dados preliminares</div>` : ''}
+ <div class="kr-card-top">
+ <span class="kr-tag">${kr.kr}</span>
+ <span class="kr-area-badge">${kr.area}</span>
+ </div>
+ <div class="kr-title">${kr.title}</div>
+ <div class="kr-meta">${bscChips}</div>
+ <div class="kr-indicators">${inds}</div>
+ </div>`;
+}
+
+function populateGrids() {
+ const maps = {
+ 'grid-growth': ['g_kr01','g_kr02','g_kr03','g_kr04'],
+ 'grid-preq': ['pq_kr01','pq_kr02','pq_kr03','pq_kr04'],
+ 'grid-aval': ['av_kr01'],
+ 'grid-posalta': ['pa_kr01','pa_kr02','pa_kr03'],
+ 'grid-rm': ['rm_kr01','rm_kr02','rm_kr03'],
+ 'grid-comm': ['c_kr01','c_kr02','c_kr03','c_kr04'],
+ };
+ for (const [gridId, ids] of Object.entries(maps)) {
+ const el = document.getElementById(gridId);
+ if (el) el.innerHTML = ids.map(renderKRCard).join('');
+ }
+}
+
+// 
+// PANEL
+// 
+function openKR(krId) {
+ const kr = DATA.krs[krId];
+ const note = DATA.notes[krId] || '';
+ document.getElementById('panel-title').textContent = `${kr.kr} · ${kr.area}`;
+ const indList = kr.indicators.map(i => `
+ <li>
+ <div class="i-name">${i.name} ${matTag(i.mat)}</div>
+ <div class="i-meta">Meta: ${i.meta} · ${i.freq}</div>
+ ${i.source ? `<div class="i-source">Fonte: ${i.source}</div>` : ''}
+ </li>`).join('');
+ const bscLinks = kr.bscLink.map(b => {
+ const obj = DATA.objectives[b];
+ return obj ? `<span class="meta-chip">${obj.persp}: ${obj.label}</span>` : '';
+ }).join(' ');
+ document.getElementById('panel-body').innerHTML = `
+ <div class="panel-section">
+ <h4>KR · Maturidade Geral</h4>
+ <p style="font-weight:600;margin-bottom:.4rem">${kr.title}</p>
+ ${matTag(kr.maturity)}
+ </div>
+ <div class="panel-section">
+ <h4>Por que este KR existe</h4>
+ <p>${kr.objective}</p>
+ </div>
+ <div class="panel-section">
+ <h4>Vinculação BSC</h4>
+ <div style="display:flex;flex-wrap:wrap;gap:.35rem">${bscLinks}</div>
+ </div>
+ <div class="panel-section">
+ <h4>Indicadores (${kr.indicators.length}) com fonte do dado</h4>
+ <ul class="ind-list">${indList}</ul>
+ </div>
+ <div class="panel-section">
+ <h4>Notas Executivas (editável)</h4>
+ <textarea class="edit-field" id="note-field" rows="4" placeholder="Decisões, contexto ou observações do executivo...">${note}</textarea>
+ <button class="save-btn" onclick="saveNote('${krId}')">Salvar Nota</button>
+ </div>`;
+ document.getElementById('detail-panel').classList.add('open');
+}
+
+function openObjective(objId) {
+ const obj = DATA.objectives[objId];
+ const note = DATA.notes['obj_' + objId] || '';
+ document.getElementById('panel-title').textContent = `${obj.persp} · ${obj.label}`;
+ const krItems = obj.krs.map(k => {
+ const kr = DATA.krs[k];
+ return kr ? `<li onclick="openKR('${k}')" style="cursor:pointer">
+ <div class="i-name">${kr.area} ${kr.kr}: ${kr.title} ${matTag(kr.maturity)}</div></li>` : '';
+ }).join('');
+ document.getElementById('panel-body').innerHTML = `
+ <div class="panel-section">
+ <h4>Objetivo Estratégico · ${obj.persp}</h4>
+ <p><strong>${obj.label}</strong></p>
+ <p style="margin-top:.4rem;color:var(--muted);font-size:11px">${obj.target}</p>
+ </div>
+ <div class="panel-section">
+ <h4>Descrição</h4>
+ <p>${obj.desc}</p>
+ </div>
+ <div class="panel-section">
+ <h4>Áreas Contribuintes</h4>
+ <div style="display:flex;flex-wrap:wrap;gap:.35rem">
+ ${obj.areas.map(a => `<span class="meta-chip">${a}</span>`).join('')}
+ </div>
+ </div>
+ ${obj.krs.length ? `<div class="panel-section"><h4>KRs Vinculados — clique para detalhar</h4><ul class="ind-list">${krItems}</ul></div>` : ''}
+ <div class="panel-section">
+ <h4>Notas Executivas (editável)</h4>
+ <textarea class="edit-field" id="note-field" rows="4" placeholder="Decisões, contexto ou observações...">${note}</textarea>
+ <button class="save-btn" onclick="saveNote('obj_${objId}')">Salvar Nota</button>
+ </div>`;
+ document.getElementById('detail-panel').classList.add('open');
+}
+
+function saveNote(id) {
+ DATA.notes[id] = document.getElementById('note-field').value;
+ showToast('Nota salva!');
+}
+
+function closePanel() {
+ document.getElementById('detail-panel').classList.remove('open');
+}
+
+// 
+// NAVIGATION corrigido (sem event implícito)
+// 
+function showView(name, btn) {
+ document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+ document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+ const viewEl = document.getElementById('view-' + name);
+ if (viewEl) viewEl.classList.add('active');
+ if (btn) btn.classList.add('active');
+ closePanel();
+}
+
+// 
+// GOVERNANCE TOGGLE
+// 
+function toggleGov() {
+ const wrap = document.getElementById('gov-wrap');
+ const chev = document.getElementById('gov-chev');
+ if (!wrap) return;
+ const isOpen = wrap.style.display !== 'none';
+ wrap.style.display = isOpen ? 'none' : '';
+ if (chev) chev.classList.toggle('open', !isOpen);
+}
+
+// 
+// EXPORT CSV
+// 
+function exportCSV() {
+ const rows = [['Área','KR','Maturidade KR','Título do KR','BSC Perspectiva','BSC Objetivos','Indicador','Maturidade Indicador','Meta','Frequência','Fonte do Dado','Nota Executivo']];
+ for (const [krId, kr] of Object.entries(DATA.krs)) {
+ const note = DATA.notes[krId] || '';
+ const bscP = [...new Set(kr.bscLink.map(b => DATA.objectives[b]?.persp).filter(Boolean))].join('; ');
+ const bscO = kr.bscLink.map(b => DATA.objectives[b]?.label).filter(Boolean).join('; ');
+ for (const ind of kr.indicators) {
+ rows.push([kr.area, kr.kr, DATA.matLabels[kr.maturity]?.label || kr.maturity, kr.title, bscP, bscO, ind.name, DATA.matLabels[ind.mat]?.label || ind.mat, ind.meta, ind.freq, ind.source || '', note]);
+ }
+ }
+ const csv = rows.map(r => r.map(c => `"${String(c||'').replace(/"/g,'""')}"`).join(',')).join('\n');
+ const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8;' });
+ const a = document.createElement('a');
+ a.href = URL.createObjectURL(blob);
+ a.download = 'BSC_Florence_2026_v6.csv';
+ a.click();
+ showToast('CSV exportado — abra no Excel ou Google Sheets.');
+}
+
+// 
+// TOAST
+// 
+function showToast(msg) {
+ const t = document.createElement('div');
+ t.className = 'toast';
+ t.textContent = msg;
+ document.body.appendChild(t);
+ setTimeout(() => t.remove(), 2400);
+}
+
+// 
+// INIT
+// 
+populateGrids();
+</script>
+</body>
+</html>
